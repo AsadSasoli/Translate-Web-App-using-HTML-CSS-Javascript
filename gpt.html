@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator</title>
+    <style>
+        /* CSS styles for the translator form */
+        .translator-form {
+            margin-top: 20px;
+        }
+        .translator-form label {
+            display: block;
+        }
+        .translator-form textarea {
+            width: 100%;
+            height: 150px;
+        }
+        .translator-form button {
+            margin-top: 10px;
+        }
+        .translation-result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Translator</h1>
+    <div class="translator-form">
+        <label for="text-input">Enter Text:</label>
+        <textarea id="text-input" placeholder="Enter text to translate" ></textarea>
+        <button onclick="translati()">Translate</button>
+    </div>
+    <div class="translation-result">
+        <h2 id="mam">Translation Result:</h2>
+        <p id="translation-output"></p>
+    </div>
+
+    <script>
+         //     const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect';
+    // const options = {
+        // 	method: 'POST',
+        // 	headers: {
+            // 		'content-type': 'application/x-www-form-urlencoded',
+            // 		'Accept-Encoding': 'application/gzip',
+            // 		'X-RapidAPI-Key': 'c434b951ecmsh14f9d4693b33729p19195bjsn2e864ad0fab1',
+            // 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+            // 	},
+            // 	body: new URLSearchParams({
+                // 		q: 'English is hard, but detectably so'
+                // 	})
+                // };
+
+
+
+                // var lang =document.getElementById('lang').valu
+                function translati() {
+                var qus=document.getElementById('text-input').value
+                const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+                const options = {
+	method: 'POST',
+	headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+		'Accept-Encoding': 'application/gzip',
+		'X-RapidAPI-Key': '54b8ae5968msh361af408d2c312cp116f53jsncbf5c048e177',
+		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+	},
+	body: new URLSearchParams({
+        q: qus,
+		target: 'ur',
+		source: 'en'
+	})
+};
+// const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/languages';
+// const options = {
+    // 	method: 'GET',
+    // 	headers: {
+        // 		'Accept-Encoding': 'application/gzip',
+        // 		'X-RapidAPI-Key': 'c434b951ecmsh14f9d4693b33729p19195bjsn2e864ad0fab1',
+        // 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+        // 	}
+        // };
+        fetch(url,options)
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            var gag = data.data.translations[0].translatedText
+            document.getElementById('mam').innerHTML+=gag
+        })
+        // if(lang == 'Urdu'){
+        //     document.getElementById('lang')='ur'
+        // }
+    }
+    </script>
+</body>
+</html>
+

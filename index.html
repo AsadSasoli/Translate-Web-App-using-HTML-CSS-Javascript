@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="dat">
+    <!-- <input type="text" id="lang"> -->
+    <select>
+        <option class="lang">Arbic</option>
+        <option class="lang">Urdu</option>
+    </select>
+    <button onclick="bttn()">Click</button>
+    <h2 id="mam"></h2>  
+</body>
+</html>
+<script>
+    //     const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect';
+    // const options = {
+        // 	method: 'POST',
+        // 	headers: {
+            // 		'content-type': 'application/x-www-form-urlencoded',
+            // 		'Accept-Encoding': 'application/gzip',
+            // 		'X-RapidAPI-Key': 'c434b951ecmsh14f9d4693b33729p19195bjsn2e864ad0fab1',
+            // 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+            // 	},
+            // 	body: new URLSearchParams({
+                // 		q: 'English is hard, but detectably so'
+                // 	})
+                // };
+                var lang =document.getElementById('lang').valu
+                function bttn() {
+                var qus=document.getElementById('dat').value
+                const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+                const options = {
+	method: 'POST',
+	headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+		'Accept-Encoding': 'application/gzip',
+		'X-RapidAPI-Key': 'c434b951ecmsh14f9d4693b33729p19195bjsn2e864ad0fab1',
+		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+	},
+	body: new URLSearchParams({
+        q: qus,
+		target: 'ur',
+		source: 'en'
+	})
+};
+// const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/languages';
+// const options = {
+    // 	method: 'GET',
+    // 	headers: {
+        // 		'Accept-Encoding': 'application/gzip',
+        // 		'X-RapidAPI-Key': 'c434b951ecmsh14f9d4693b33729p19195bjsn2e864ad0fab1',
+        // 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+        // 	}
+        // };
+        fetch(url,options)
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            var gag = data.data.translations[0].translatedText
+            document.getElementById('mam').innerHTML=gag
+        })
+        // if(lang == 'Urdu'){
+        //     document.getElementById('lang')='ur'
+        // }
+    }
+        </script>
